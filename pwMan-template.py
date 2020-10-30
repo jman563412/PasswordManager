@@ -60,7 +60,7 @@ def bytesToDict(dict):
 def encrypt(dict, k):
 	##Define the encryption scheme here.
 	cipher = AES.new(k, AES.MODE_EAX)
-	ciphertext, tag = cipher.encrypt_and_digest(data) ##data?
+	ciphertext, tag = cipher.encrypt_and_digest(dict) ##data?
 	##Encrypt the dictionary value here.
 	
 
