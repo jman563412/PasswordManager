@@ -36,6 +36,8 @@
 # Updated 9 October 2019 by Peyton Pritchard
 # Updated to Python 3.7.4
 
+import random
+import string
 import csv, os, sys, json
 from Crypto.Hash import SHA256
 from Crypto.Cipher import AES
@@ -113,10 +115,22 @@ def Main():
 			print("password: " + str(pws[entry]))
 		else:
 			print("No entry for " + str(entry) + ", creating new...")
-			newPass = input("New entry - enter password for "+entry+": ")
-			pws[entry] = newPass
-			encrypt( dictToBytes(pws), k)
-			print("stored")
+			userRandom = input("Would you like to create a random password or use your own? Please enter 'y' or 'n'")
+			if userRandom == 'y':
+				print("User has selected to create a random password")
+				##create random password
+				usernameDict = string.ascii_lowercase
+				randomPass = ''.join(random.choice(usernameDict) for i in range(8))
+				print("random password = "+randomPass)
+				pws[entry] = randomPass
+				encrypt( dictToBytes(pws), k)
+				print("stored")
+			else:
+				print("User has chosen to create their own password")
+				newPass = input("New entry - enter password for "+entry+": ")
+				pws[entry] = newPass
+				encrypt( dictToBytes(pws), k)
+				print("stored")
 
 
 if __name__ == '__main__':
