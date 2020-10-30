@@ -36,7 +36,7 @@
 # Updated 9 October 2019 by Peyton Pritchard
 # Updated to Python 3.7.4
 
-import random
+import random ##random and string imports for our random password generator to function.  
 import string
 import csv, os, sys, json
 from Crypto.Hash import SHA256
@@ -62,8 +62,8 @@ def bytesToDict(dict):
 def encrypt(dict, k):
 	##Define the encryption scheme here.
 	cipher = AES.new(k, AES.MODE_EAX)
-	ciphertext, tag = cipher.encrypt_and_digest(dict) ##data?
 	##Encrypt the dictionary value here.
+	ciphertext, tag = cipher.encrypt_and_digest(dict) ##data?
 	
 
 	with open(passwordFile, 'wb') as outfile:
@@ -73,8 +73,9 @@ def decrypt(k):
 		nonce, tag, ciphertext = [ infile.read(x) for x in (16, 16, -1) ]
 		##Define the encryption scheme here.
 		cipher = AES.new(k, AES.MODE_EAX, nonce)
-		data = cipher.decrypt_and_verify(ciphertext, tag) ##data?
 		##Decrypt the ciphertext here.
+		data = cipher.decrypt_and_verify(ciphertext, tag) ##data?
+		
 	
 		return data
 
@@ -119,13 +120,14 @@ def Main():
 			if userRandom == 'y':
 				print("User has selected to create a random password")
 				##create random password
-				usernameDict = string.ascii_lowercase
-				randomPass = ''.join(random.choice(usernameDict) for i in range(8))
-				print("random password = "+randomPass)
-				pws[entry] = randomPass
+				usernameDict = string.ascii_lowercase ##creates the dictionary for the password to use. All lowercase ascii chars in this program.
+				randomPass = ''.join(random.choice(usernameDict) for i in range(8)) ##uses the random.choice function to pick 8 random letters from the dictionary.
+				##print("random password = "+randomPass)
+				pws[entry] = randomPass ##puts the password in the database and the next line calls the encrypt function to encrypt it. 
 				encrypt( dictToBytes(pws), k)
 				print("stored")
 			else:
+				##users opts to input their own password. Same functionality as before except with simple inputs. 
 				print("User has chosen to create their own password")
 				newPass = input("New entry - enter password for "+entry+": ")
 				pws[entry] = newPass
