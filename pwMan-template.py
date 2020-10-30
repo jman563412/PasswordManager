@@ -46,7 +46,7 @@ from Crypto.Protocol.KDF import PBKDF2
 
 passwordFile = "passwords"
 ##The salt value should be set here.
-salt = "salt"
+salt = "snailKiller"
 ##The header of the file.
 head = " ____               __  __\n"+"|  _ \ __ _ ___ ___|  \/  | __ _ _ __  \n" +"| |_) / _` / __/ __| |\/| |/ _` | '_ \ \n" +"|  __/ (_| \__ \__ \ |  | | (_| | | | |\n" +"|_|   \__,_|___/___/_|  |_|\__,_|_| |_|\n"
 
@@ -63,7 +63,7 @@ def encrypt(dict, k):
 	##Define the encryption scheme here.
 	cipher = AES.new(k, AES.MODE_EAX)
 	##Encrypt the dictionary value here.
-	ciphertext, tag = cipher.encrypt_and_digest(dict) ##data?
+	ciphertext, tag = cipher.encrypt_and_digest(dict) 
 	
 
 	with open(passwordFile, 'wb') as outfile:
@@ -74,7 +74,7 @@ def decrypt(k):
 		##Define the encryption scheme here.
 		cipher = AES.new(k, AES.MODE_EAX, nonce)
 		##Decrypt the ciphertext here.
-		data = cipher.decrypt_and_verify(ciphertext, tag) ##data?
+		data = cipher.decrypt_and_verify(ciphertext, tag)
 		
 	
 		return data
