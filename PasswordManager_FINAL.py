@@ -36,6 +36,18 @@
 # Updated 9 October 2019 by Peyton Pritchard
 # Updated to Python 3.7.4
 
+
+
+#The existing template comments have been left in the code to provide references and instructions on usage.
+#A README is included in the .ZIP file for the project
+
+#PROJECT PARTNERS:
+#Benjamin Cobb
+#Justin Dupuis
+
+
+
+
 import random ##random and string imports for our random password generator to function.  
 import string
 import csv, os, sys, json
